@@ -12,7 +12,7 @@ npm i @wizo06/logger
 # Quick start
 Filename `index.js` with content:
 ```js
-1 const logger = require('logger')
+1 const logger = require('@wizo06/logger')
 2
 3 logger.info('Hello, World!') 
 4 logger.success(`This is a success message`)
