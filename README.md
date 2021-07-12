@@ -6,7 +6,7 @@ Inspired by [Ayumi](https://github.com/shunjuu/Ayumi).
 
 # Installation
 ```bash
-npm i wizo06/logger
+npm i @wizo06/logger
 ```
 
 # Quick start
