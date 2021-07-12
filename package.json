@@ -1,0 +1,12 @@
+{
+  "name": "@wizo06/logger",
+  "version": "1.0.0",
+  "main": "index.js",
+  "files": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wizo06/logger.git"
+  },
+  "author": "wizo06",
+  "license": "AGPL-3.0-only"
+}
