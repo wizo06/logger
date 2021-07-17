@@ -1,4 +1,5 @@
 const { basename } = require('path')
+const { hostname } = require('os')
 
 function getCallingDetails() {  
   const err = new Error()
@@ -19,14 +20,20 @@ function formatDate(now) {
   let hour = now.getHours()
   let min = now.getMinutes()
   let sec = now.getSeconds()
+  let tz = now.getTimezoneOffset() / 60 * (-1)
 
   month = (month < 10) ? `0${month}` : month
   date = (date < 10) ? `0${date}` : date
   hour = (hour < 10) ? `0${hour}` : hour
   min = (min < 10) ? `0${min}` : min
   sec = (sec < 10) ? `0${sec}` : sec
+  
+  if (tz > 0 && tz < 10) tz = `+0${Math.abs(tz)}:00`
+  if (tz > 0 && tz >= 10) tz = `+${Math.abs(tz)}:00`
+  if (tz < 0 && tz > -10) tz = `-0${Math.abs(tz)}:00`
+  if (tz < 0 && tz <= -10) tz = `-${Math.abs(tz)}:00`
 
-  return { year, month, date, hour, min, sec }
+  return { year, month, date, hour, min, sec, tz }
 }
 
 module.exports = logger = {
@@ -53,51 +60,46 @@ module.exports = logger = {
 
   success: (data = '') => {
     const now = new Date()
-    const { year, month, date, hour, min, sec } = formatDate(now)
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
-    const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|${tz}`
+    const { year, month, date, hour, min, sec, tz } = formatDate(now)
+    const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.green}SUCCESS${logger.format.reset}`
 
-    console.log(`[${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
+    console.log(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
   },
 
   info: (data = '') => {
     const now = new Date()
-    const { year, month, date, hour, min, sec } = formatDate(now)
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
-    const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|${tz}`
+    const { year, month, date, hour, min, sec, tz } = formatDate(now)
+    const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.cyan}INFO${logger.format.reset}`
 
-    console.log(`[${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
+    console.log(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
   },
 
   debug: (data = '') => {
     const now = new Date()
-    const { year, month, date, hour, min, sec } = formatDate(now)
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
-    const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|${tz}`
+    const { year, month, date, hour, min, sec, tz } = formatDate(now)
+    const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.magenta}DEBUG${logger.format.reset}`
 
-    console.log(`[${timestamp}] [${getCallingDetails()}] [${loglevel}] ${logger.format.dim}${data}${logger.format.reset}`)
+    console.log(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${logger.format.dim}${data}${logger.format.reset}`)
   },
 
   warning: (data = '') => {
     const now = new Date()
-    const { year, month, date, hour, min, sec } = formatDate(now)
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
-    const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|${tz}`
+    const { year, month, date, hour, min, sec, tz } = formatDate(now)
+    const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.yellow}WARNING${logger.format.reset}`
 
-    console.log(`[${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
+    console.log(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
   },
 
   error: (data = '') => {
     const now = new Date()
-    const { year, month, date, hour, min, sec } = formatDate(now)
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
-    const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|${tz}`
+    const { year, month, date, hour, min, sec, tz } = formatDate(now)
+    const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.red}ERROR${logger.format.reset}`
 
-    console.log(`[${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
+    console.log(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
   },
 }
