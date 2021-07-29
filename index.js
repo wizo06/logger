@@ -73,7 +73,7 @@ module.exports = logger = {
     const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.cyan}INFO${logger.format.reset}`
 
-    console.log(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
+    console.info(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
   },
 
   debug: (data = '') => {
@@ -82,7 +82,7 @@ module.exports = logger = {
     const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.magenta}DEBUG${logger.format.reset}`
 
-    console.log(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${logger.format.dim}${data}${logger.format.reset}`)
+    console.debug(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${logger.format.dim}${data}${logger.format.reset}`)
   },
 
   warning: (data = '') => {
@@ -91,7 +91,7 @@ module.exports = logger = {
     const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.yellow}WARNING${logger.format.reset}`
 
-    console.log(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
+    console.warn(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
   },
 
   error: (data = '') => {
@@ -100,6 +100,6 @@ module.exports = logger = {
     const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.red}ERROR${logger.format.reset}`
 
-    console.log(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
+    console.error(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
   },
 }

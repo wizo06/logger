@@ -1,7 +1,10 @@
 {
   "name": "@wizo06/logger",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "index.js",
+  "scripts": {
+    "test": "node stdout_stderr.js"
+  },
   "files": [],
   "repository": {
     "type": "git",
