@@ -1,12 +1,12 @@
 const { basename } = require('path')
 const { hostname } = require('os')
 
-function getCallingDetails() {  
+function getCallingDetails(stackDepth = 3) {  
   const err = new Error()
   const frames = err.stack.split('\n')
-  const thirdFrame = frames[3].trim()
+  const frame = frames[stackDepth].trim()
   
-  const fileName_line_column = basename(thirdFrame).replace(')', '')
+  const fileName_line_column = basename(frame).replace(')', '')
   const fileName = fileName_line_column.split(':')[0]
   const line = fileName_line_column.split(':')[1]
 
@@ -58,48 +58,48 @@ module.exports = logger = {
     hidden: '\x1b[8m',
   },
 
-  success: (data = '') => {
+  success: (data = '', { stackDepth = 3 } = {}) => {
     const now = new Date()
     const { year, month, date, hour, min, sec, tz } = formatDate(now)
     const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.green}SUCCESS${logger.format.reset}`
 
-    console.log(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
+    console.log(`[${hostname()}] [${timestamp}] [${getCallingDetails(stackDepth)}] [${loglevel}] ${data}${logger.format.reset}`)
   },
 
-  info: (data = '') => {
+  info: (data = '', { stackDepth = 3 } = {}) => {
     const now = new Date()
     const { year, month, date, hour, min, sec, tz } = formatDate(now)
     const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.cyan}INFO${logger.format.reset}`
 
-    console.info(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
+    console.info(`[${hostname()}] [${timestamp}] [${getCallingDetails(stackDepth)}] [${loglevel}] ${data}${logger.format.reset}`)
   },
 
-  debug: (data = '') => {
+  debug: (data = '', { stackDepth = 3 } = {}) => {
     const now = new Date()
     const { year, month, date, hour, min, sec, tz } = formatDate(now)
     const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.magenta}DEBUG${logger.format.reset}`
 
-    console.debug(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${logger.format.dim}${data}${logger.format.reset}`)
+    console.debug(`[${hostname()}] [${timestamp}] [${getCallingDetails(stackDepth)}] [${loglevel}] ${logger.format.dim}${data}${logger.format.reset}`)
   },
 
-  warning: (data = '') => {
+  warning: (data = '', { stackDepth = 3 } = {}) => {
     const now = new Date()
     const { year, month, date, hour, min, sec, tz } = formatDate(now)
     const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.yellow}WARNING${logger.format.reset}`
 
-    console.warn(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
+    console.warn(`[${hostname()}] [${timestamp}] [${getCallingDetails(stackDepth)}] [${loglevel}] ${data}${logger.format.reset}`)
   },
 
-  error: (data = '') => {
+  error: (data = '', { stackDepth = 3 } = {}) => {
     const now = new Date()
     const { year, month, date, hour, min, sec, tz } = formatDate(now)
     const timestamp = `${year}.${month}.${date}|${hour}:${min}:${sec}|UTC${tz}`
     const loglevel = `${logger.color.red}ERROR${logger.format.reset}`
 
-    console.error(`[${hostname()}] [${timestamp}] [${getCallingDetails()}] [${loglevel}] ${data}${logger.format.reset}`)
+    console.error(`[${hostname()}] [${timestamp}] [${getCallingDetails(stackDepth)}] [${loglevel}] ${data}${logger.format.reset}`)
   },
 }
