@@ -1,7 +1,7 @@
 {
   "name": "@wizo06/logger",
   "version": "2.0.0",
-  "main": "index.js",
+  "main": "lib/index.js",
   "files": ["lib/*"],
   "repository": {
     "type": "git",
