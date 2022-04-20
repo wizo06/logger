@@ -63,12 +63,12 @@ Output:
 
 ```console
 $ node test.js
-[hanabira] [1650427042624|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [INFO] Hello, World!
-[hanabira] [1650427042627|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [SUCCESS] Hello, World!
-[hanabira] [1650427042627|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [DEBUG] Hello, World!
-[hanabira] [1650427042627|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [WARN] Hello, World!
-[hanabira] [1650427042628|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [ERROR] Hello, World!
-[hanabira] [1650427042628|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [INFO] { foo: 'bar' }
+[hanabira] [1650427853790|2022.04.20|00:10:53|UTC-04:00] [test.js:12] [INFO] Hello, World!
+[hanabira] [1650427853793|2022.04.20|00:10:53|UTC-04:00] [test.js:13] [SUCCESS] Hello, World!
+[hanabira] [1650427853794|2022.04.20|00:10:53|UTC-04:00] [test.js:14] [DEBUG] Hello, World!
+[hanabira] [1650427853794|2022.04.20|00:10:53|UTC-04:00] [test.js:15] [WARN] Hello, World!
+[hanabira] [1650427853794|2022.04.20|00:10:53|UTC-04:00] [test.js:16] [ERROR] Hello, World!
+[hanabira] [1650427853794|2022.04.20|00:10:53|UTC-04:00] [test.js:17] [INFO] { foo: 'bar' }
 ```
 
 # Full Output Format

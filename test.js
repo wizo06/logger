@@ -1,6 +1,5 @@
-const { Logger, colors, formats } = require("./lib/index.js");
-console.log(colors);
-console.log(formats);
+const { Logger } = require("./lib/index.js");
+
 const logger = new Logger({
   printHostname: true,
   printUNIXTimestamp: true,
