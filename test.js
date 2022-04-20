@@ -1,13 +1,18 @@
-const logger = require('./index.js')
+const { Logger, colors, formats } = require("./lib/index.js");
+console.log(colors);
+console.log(formats);
+const logger = new Logger({
+  printHostname: true,
+  printUNIXTimestamp: true,
+  printHumanReadableTimestamp: true,
+  printFileName: true,
+  printLineNumber: true,
+  printLogLevel: true,
+});
 
-logger.info('Hello, World!')
-logger.success('Hello, World!')
-logger.debug('Hello, World!')
-logger.warning('Hello, World!')
-logger.error('Hello, World!')
-
-logger.info('Hello, World!', { stackDepth: 4 })
-logger.success('Hello, World!', { stackDepth: 4 })
-logger.debug('Hello, World!', { stackDepth: 4 })
-logger.warning('Hello, World!', { stackDepth: 4 })
-logger.error('Hello, World!', { stackDepth: 4 })
+logger.info(`Hello, World!`);
+logger.success("Hello, World!");
+logger.debug("Hello, World!");
+logger.warn("Hello, World!");
+logger.error("Hello, World!");
+logger.info({ foo: "bar" });

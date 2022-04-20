@@ -2,71 +2,106 @@
 
 An informative console logger for Node.js.
 
-Inspired by [Ayumi](https://github.com/shunjuu/Ayumi).
-
 # Installation
+
 ```bash
 npm i @wizo06/logger
 ```
 
 # Quick start
+
 Filename `test.js` with content:
+
 ```js
- 1 const logger = require('@wizo06/logger')
- 2
- 3 logger.info('Hello, World!')
- 4 logger.success('Hello, World!')
- 5 logger.debug('Hello, World!')
- 6 logger.warning('Hello, World!')
- 7 logger.error('Hello, World!')
- 8
- 9 logger.info('Hello, World!', { stackDepth: 4 })
-10 logger.success('Hello, World!', { stackDepth: 4 })
-11 logger.debug('Hello, World!', { stackDepth: 4 })
-12 logger.warning('Hello, World!', { stackDepth: 4 })
-13 logger.error('Hello, World!', { stackDepth: 4 })
-```
-Output:
-```
-[PC-1234] [2021.08.23|00:00:06|UTC-04:00] [test.js:3] [INFO] Hello, World!
-[PC-1234] [2021.08.23|00:00:06|UTC-04:00] [test.js:4] [SUCCESS] Hello, World!
-[PC-1234] [2021.08.23|00:00:06|UTC-04:00] [test.js:5] [DEBUG] Hello, World!
-[PC-1234] [2021.08.23|00:00:06|UTC-04:00] [test.js:6] [WARNING] Hello, World!
-[PC-1234] [2021.08.23|00:00:06|UTC-04:00] [test.js:7] [ERROR] Hello, World!
-[PC-1234] [2021.08.23|00:00:06|UTC-04:00] [loader:1101] [INFO] Hello, World!
-[PC-1234] [2021.08.23|00:00:06|UTC-04:00] [loader:1101] [SUCCESS] Hello, World!
-[PC-1234] [2021.08.23|00:00:06|UTC-04:00] [loader:1101] [DEBUG] Hello, World!
-[PC-1234] [2021.08.23|00:00:06|UTC-04:00] [loader:1101] [WARNING] Hello, World!
-[PC-1234] [2021.08.23|00:00:06|UTC-04:00] [loader:1101] [ERROR] Hello, World!
+const { Logger } = require("@wizo06/logger");
+const logger = new Logger();
+
+logger.info(`Hello, World!`);
+logger.success("Hello, World!");
+logger.debug("Hello, World!");
+logger.warn("Hello, World!");
+logger.error("Hello, World!");
+logger.info({ foo: "bar" });
 ```
 
-## Output format
+Output:
+
+```console
+$ node test.js
+[2022.04.19|23:54:07|UTC-04:00] [INFO] Hello, World!
+[2022.04.19|23:54:07|UTC-04:00] [SUCCESS] Hello, World!
+[2022.04.19|23:54:07|UTC-04:00] [DEBUG] Hello, World!
+[2022.04.19|23:54:07|UTC-04:00] [WARN] Hello, World!
+[2022.04.19|23:54:07|UTC-04:00] [ERROR] Hello, World!
+[2022.04.19|23:54:07|UTC-04:00] [INFO] { foo: 'bar' }
 ```
-[<hostname>] [<timestamp>] [<file>:<line number>] [<log level>]
+
+# Configuration
+
+You can configure the logger by passing in these options in the constructor:
+
+```js
+const { Logger } = require("@wizo06/logger");
+const logger = new Logger({
+  printHostname: true,
+  printUNIXTimestamp: true,
+  printHumanReadableTimestamp: true,
+  printFileName: true,
+  printLineNumber: true,
+  printLogLevel: true,
+});
+
+logger.info(`Hello, World!`);
+logger.success("Hello, World!");
+logger.debug("Hello, World!");
+logger.warn("Hello, World!");
+logger.error("Hello, World!");
+logger.info({ foo: "bar" });
 ```
+
+Output:
+
+```
+$ node test.js
+[hanabira] [1650427042624|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [INFO] Hello, World!
+[hanabira] [1650427042627|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [SUCCESS] Hello, World!
+[hanabira] [1650427042627|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [DEBUG] Hello, World!
+[hanabira] [1650427042627|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [WARN] Hello, World!
+[hanabira] [1650427042628|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [ERROR] Hello, World!
+[hanabira] [1650427042628|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [INFO] { foo: 'bar' }
+```
+
+# Full Output Format
+
+```
+[<hostname>] [<unix timestamp>|<human readable timestamp>] [<file name>:<line number>] [<log level>]
+```
+
 # Available styling
 
 ```js
-logger.color.black
-logger.color.red
-logger.color.green
-logger.color.yellow
-logger.color.blue
-logger.color.magenta
-logger.color.cyan
-logger.color.white
+const { colors, formats } = require("@wizo06/logger");
 
-logger.format.reset
-logger.format.bright
-logger.format.dim
-logger.format.underscore
-logger.format.blink
-logger.format.reverse
-logger.format.hidden
+colors.BLACK;
+colors.RED;
+colors.GREEN;
+colors.YELLOW;
+colors.BLUE;
+colors.MAGENTA;
+colors.CYAN;
+colors.WHITE;
+
+formats.RESET;
+formats.BRIGHT;
+formats.DIM;
+formats.UNDERSCORE;
+formats.BLINK;
+formats.REVERSE;
+formats.HIDDEN;
 ```
 
 ## Example
 
 ```js
-logger.info(`Downloading ${logger.color.yellow}${filename}`)
+logger.info(`Downloading ${formats.UNDERSCORE}${filename}${formats.RESET}`);
 ```
