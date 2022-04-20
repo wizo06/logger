@@ -61,7 +61,7 @@ logger.info({ foo: "bar" });
 
 Output:
 
-```
+```console
 $ node test.js
 [hanabira] [1650427042624|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [INFO] Hello, World!
 [hanabira] [1650427042627|2022.04.19|23:57:22|UTC-04:00] [loader:1103] [SUCCESS] Hello, World!
