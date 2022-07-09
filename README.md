@@ -38,17 +38,19 @@ $ node test.js
 
 # Configuration
 
-You can configure the logger by passing in these options in the constructor:
+By default, the constructor initializes the properties with these values:
 
 ```js
 const { Logger } = require("@wizo06/logger");
 const logger = new Logger({
-  printHostname: true,
-  printUNIXTimestamp: true,
-  printHumanReadableTimestamp: true,
-  printFileName: true,
-  printLineNumber: true,
-  printLogLevel: true,
+  printHostname = false, 
+  printUNIXTimestamp = false, 
+  printHumanReadableTimestamp = true, 
+  stackDepth = 4, 
+  printFileName = false, 
+  printFunctionName = true,
+  printLineNumber = true, 
+  printLogLevel = true 
 });
 
 logger.info(`Hello, World!`);
@@ -74,7 +76,7 @@ $ node test.js
 # Full Output Format
 
 ```
-[<hostname>] [<unix timestamp>|<human readable timestamp>] [<file name>:<line number>] [<log level>]
+[<hostname>] [<unix timestamp>|<human readable timestamp>] [<file name>:<function_name>:<line number>] [<log level>]
 ```
 
 # Available styling
