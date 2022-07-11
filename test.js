@@ -22,3 +22,10 @@ logger.info({ foo: 'bar' }, 'foo', 42, false, Date(), ['foo', 'bar'], new Map())
 
 function myFunc() { logger.info('foo bar baz') };
 myFunc();
+
+const myArrowFunc = () => { logger.info('this is an arrow func') };
+myArrowFunc();
+
+(() => {
+  logger.info('foo bar');
+})();
